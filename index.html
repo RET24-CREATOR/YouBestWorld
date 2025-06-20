@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ты самая лучшая!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffebf3 50%, #ffe0f0 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        .message {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            color: #ff69b4;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .flower {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            animation: heart-float 8s infinite linear;
+            font-size: 24px;
+        }
+        
+        @keyframes heart-float {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-300px) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Ты самая лучшая на планете!</h1>
+    </div>
+    
+    <script>
+        // Создаем цветы
+        function createFlowers() {
+            const colors = ['#ff69b4', '#ff8fab', '#ffb3c1', '#ffc2d1', '#ffd7e1'];
+            const symbols = ['🌸', '🌺', '🌷', '🏵️', '💮', '🌼', '🌹'];
+            
+            for (let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.color = colors[Math.floor(Math.random() * colors.length)];
+                flower.style.fontSize = `${Math.random() * 30 + 20}px`;
+                flower.style.left = `${Math.random() * 100}vw`;
+                flower.style.top = `${Math.random() * 100}vh`;
+                flower.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                document.body.appendChild(flower);
+            }
+        }
+        
+        // Создаем сердечки
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.bottom = '-20px';
+                heart.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                document.body.appendChild(heart);
+                
+                // Удаляем сердечко после анимации
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }, 300);
+        }
+        
+        // Инициализация
+        window.onload = function() {
+            createFlowers();
+            createHearts();
+        };
+    </script>
+</body>
+</html>
